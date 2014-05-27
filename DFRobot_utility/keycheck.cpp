@@ -11,8 +11,10 @@
  *
  */
 
-uint16_t key_analog_range = 50;
-uint16_t key_delay_time = 20;
+#include "Arduino.h"
+
+extern uint16_t key_analog_range;
+extern uint16_t key_delay_time;
 
 
 //digital pin key 0 or 1

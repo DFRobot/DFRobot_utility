@@ -19,6 +19,9 @@
  */
 /**************************************************************************/
 
+#ifdef __KEYCHECK__
+#define __KEYCHECK__
+
 
 uint16_t key_analog_range = 50;
 uint16_t key_delay_time = 20;
@@ -34,3 +37,4 @@ boolean issticked (uint16_t key, uint16_t range);
 boolean issticked2 (uint16_t key, uint16_t left, uint16_t right); 
 
 
+#endif

@@ -1,17 +1,18 @@
 /**************************************************************************/
 /*! 
-  @file     DFRobotCar.cpp
-  @author   lisper (lisper.li@dfrobot.com)
-  @license  LGPLv3 (see license.txt) 
+	@file     DFRobotCar.cpp
+	@author   lisper (lisper.li@dfrobot.com)
+	@license  LGPLv3 (see license.txt) 
   
 	provide some useful function make it easy to control two DC car
-	
-	// Copyright (C) 2014 DFRobot
+
+	Copyright (C) 2014 DFRobot
 */
 
 #include <Arduino.h>
 #include "DFRobotCar.h"
 
+//DFRobotCar mycar (4,5,7,6);
 DFRobotCar::DFRobotCar (uint8_t left_en, uint8_t left_pwm, uint8_t right_en, uint8_t right_pwm) {
 	_left_en = left_en;
 	_left_pwm = left_pwm;
@@ -21,8 +22,14 @@ DFRobotCar::DFRobotCar (uint8_t left_en, uint8_t left_pwm, uint8_t right_en, uin
 	pinMode (_left_pwm, OUTPUT);
 	pinMode (_right_en, OUTPUT);
 	pinMode (_right_pwm, OUTPUT);
+
+	_left_advance = LOW;
+	_left_back = HIGH;
+	_right_advance = HIGH;
+	_right_back = LOW;
 }
 
+//
 void DFRobotCar::changeDir (bool left, bool right) {
 	if (left) {
 		_left_advance = !_left_advance;
@@ -35,6 +42,7 @@ void DFRobotCar::changeDir (bool left, bool right) {
 
 }
 
+//
 void DFRobotCar::control (int16_t left_speed, int16_t right_speed) {
 	if (left_speed < 0) {
 		left_speed = -left_speed;
@@ -55,4 +63,5 @@ void DFRobotCar::control (int16_t left_speed, int16_t right_speed) {
 	analogWrite (_left_pwm, left_speed);
 	analogWrite (_right_pwm, right_speed);
 }
+
 

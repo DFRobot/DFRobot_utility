@@ -10,16 +10,16 @@
 */
 
 #include <Arduino.h>
-#include <Wire.h>
+#include "Wire.h"
 
-//i2c master send data to slaver
+//iic master send data to slave
 void iicWrite (uint8_t theSlave, uint8_t *theBuf, uint8_t theLeng) {
 	Wire.beginTransmission(theSlave);
 	Wire.write(theBuf, theLeng);
 	Wire.endTransmission();
 }
 
-//i2c slave send data to master
+//iic slave send data to master
 void iicWrite (uint8_t *theBuf, uint8_t theLeng) {
 	Wire.write(theBuf, theLeng);
 }

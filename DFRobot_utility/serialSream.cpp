@@ -13,7 +13,7 @@
 #include <Arduino.h>
 
 //call like : read_serial_with_timeout (Serial1, buffer, 12, 5)
-uint8_t read_serial_with_timeout (HardwareSerial the_serial, 
+uint8_t serialRead (HardwareSerial the_serial, 
 		uint8_t *buf, uint8_t leng, uint8_t timeout) {
 	int sub;
 	if (the_serial.available ()) {
@@ -25,6 +25,24 @@ uint8_t read_serial_with_timeout (HardwareSerial the_serial,
 			}
 			buf[sub] = the_serial.read ();
 		}
+		return sub;
+	}
+	return 0;
+}
+
+uint8_t serialReads (HardwareSerial the_serial, 
+		uint8_t *buf, uint8_t leng, uint8_t timeout) {
+	int sub;
+	if (the_serial.available ()) {
+		for (sub=0; sub<leng; sub++) {
+			uint32_t start_time = millis ();
+			while (!the_serial.available ()) {
+				if (millis () - start_time > timeout)
+					return sub;
+			}
+			buf[sub] = the_serial.read ();
+		}
+		buf[sub] = '\0';
 		return sub;
 	}
 	return 0;
@@ -33,7 +51,7 @@ uint8_t read_serial_with_timeout (HardwareSerial the_serial,
 #if defined(__AVR_ATmega32U4__)
 
 //call like : read_serial_with_timeout (Serial, buffer, 12, 5)
-uint8_t read_serial_with_timeout (Serial_ the_serial, 
+uint8_t serialRead (Serial_ the_serial, 
 		uint8_t *buf, uint8_t leng, uint8_t timeout) {
 	int sub;
 	if (the_serial.available ()) {
@@ -50,24 +68,30 @@ uint8_t read_serial_with_timeout (Serial_ the_serial,
 	return 0;
 }
 
-#endif
-
-//
-uint8_t serial_reads (uint8_t *buf, uint8_t leng) {
+uint8_t serialReads (Serial_ the_serial, 
+		uint8_t *buf, uint8_t leng, uint8_t timeout) {
 	int sub;
-	if (Serial.available ()) {
-		for (sub=0; Serial.available () && sub<leng; sub++) {
-			buf[sub] = Serial.read ();
+	if (the_serial.available ()) {
+		for (sub=0; sub<leng; sub++) {
+			uint32_t start_time = millis ();
+			while (!the_serial.available ()) {
+				if (millis () - start_time > timeout)
+					return sub;
+			}
+			buf[sub] = the_serial.read ();
 		}
+		buf[sub] = '\0';
 		return sub;
 	}
 	return 0;
 }
 
+#endif
+
 
 #if defined(__AVR_ATmega32U4__)
 
-uint8_t serial1_reads (uint8_t *buf, uint8_t leng) {
+uint8_t serial1Read (uint8_t *buf, uint8_t leng) {
 	int sub;
 	if (Serial1.available ()) {
 		for (sub=0; sub<leng; sub++) {
@@ -100,7 +124,7 @@ void serial2Write (uint8_t *theBuf, uint8_t leng) {
 #endif
 
 //print data to PC in hex for test
-void serialHex (uint8_t *thebuf, uint8_t leng) {
+void printHex (uint8_t *thebuf, uint8_t leng) {
 	Serial.print (leng);
 	Serial.print (":");
 	for (int i=0; i<leng; i++) {
@@ -111,11 +135,18 @@ void serialHex (uint8_t *thebuf, uint8_t leng) {
 }
 
 
+//
+void pauseSerial (uint16_t delayTime) {
+	uint32_t nowTime = millis (); 
+	Serial.println ("input anything to start:");
+	while ((millis () - nowTime < delayTime) && !Serial.available ());
+	Serial.println ("start running...");
+}
 
-/*
-   void serial_transmit (HardwareSerail serial1, HardwareSerail serial2) {
-   int value = serial1.read ();
-   if (value != -1)
-   serial2.write (value);
-   }
- */
+//
+void pauseSerial () {
+	Serial.println ("input anything to start:");
+	while (!Serial.available ());
+	Serial.println ("start running...");
+}
+

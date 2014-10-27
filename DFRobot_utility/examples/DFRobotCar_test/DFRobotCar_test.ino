@@ -1,13 +1,13 @@
 /**************************************************************************/
 /*! 
-	@file     DFRobotCar_test.ino
-	@author   lisper (lisper.li@dfrobot.com)
-	@license  LGPLv3 (see license.txt) 
-	  
-	test code for DFRobotCar library
-	
-	Copyright (C) 2014 DFRobot
-*/
+  @file     DFRobotCar_test.ino
+  @author   lisper (lisper.li@dfrobot.com)
+  @license  LGPLv3 (see license.txt) 
+
+  test code for DFRobotCar library
+
+  Copyright (C) 2014 DFRobot
+ */
 
 #include <DFRobot_utility.h>
 
@@ -38,7 +38,7 @@ void loop () {
  *	DFRobotCar (uint8_t left_en, uint8_t left_pwm, uint8_t right_en, uint8_t right_pwm);
  *	
  *	//switch left and right side direction
- *	void switchDir (bool left, bool right);
+ *	void changeDir (boolean left, boolean right);
  *	
  *	//specify left and right side's speed, round is (-255 ~ 255)        
  *	void control (int16_t left, int16_t right); 

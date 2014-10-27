@@ -10,7 +10,7 @@
 */
 
 #include <Arduino.h>
-#include <Wire.h>
+#include "Wire.h"
 
 
 //i2c master send data to slaver

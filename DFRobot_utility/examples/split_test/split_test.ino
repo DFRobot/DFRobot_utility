@@ -22,13 +22,12 @@ void setup () {
 }
 
 void loop () {
-        int leng = read_serial_with_timeout (Serial, (uint8_t*)buf, BUF_SIZE, 10);
+        int leng = serialReads (Serial, (uint8_t*)buf, BUF_SIZE, 10);
         if (leng) {
-                buf[leng] = '\0';
                 Serial.print ("get ");
                 Serial.print (leng);
                 Serial.println (" byte:");
-                print_hex ((uint8_t*)buf, leng);
+                printHex ((uint8_t*)buf, leng);
                 int cmdleng = split (cmdbuf, buf, CMD_SIZE);
                 Serial.print ("get ");
                 Serial.print (cmdleng);
@@ -40,5 +39,4 @@ void loop () {
                 }
         }
 }
-
 

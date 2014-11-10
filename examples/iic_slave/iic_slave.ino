@@ -1,10 +1,9 @@
 /**************************************************************************/
 /*! 
-  @file     read_serial_test.ino
+  @file     iic_slave.ino
   @author   lisper (lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
 
-  test read_serial_with_timeout ()
 
   Copyright (C) DFRobot - www.dfrobot.com
  */

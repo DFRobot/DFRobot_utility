@@ -1,6 +1,10 @@
 #include "DFRobot_utility.h"
 #include <utility/DFTimer.h>
 
+void blink_func ();
+void func1s ();
+void func4s (void *args);
+
 DFTimer blink_timer = DFTimer (blink_func, 1000);
 DFTimer timer1s = DFTimer (func1s, 1000);
 DFTimer timer4s = DFTimer (func4s, 4000, (void*)"4s");

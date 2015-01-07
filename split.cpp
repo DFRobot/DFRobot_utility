@@ -25,11 +25,6 @@ char *argv[ARGV_SIZE];
 void serialReadCmd (HardwareSerial theSerial) {
 	int leng = serialReads (theSerial, (uint8_t*)cmdBuf, CMD_BUF_SIZE, 4);
 	if (leng) {
-		Serial.println (cmdBuf);
-		for (int i=0; i<leng; i++) {
-			Serial.print (cmdBuf[i]);
-		}
-		Serial.println ();
 		argc = split (argv, cmdBuf, ARGV_SIZE);
 	} else {
 		argc = 0;

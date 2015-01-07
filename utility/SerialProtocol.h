@@ -3,11 +3,11 @@
   @file     SerialProtocol.h
   @author   lisper (lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
-  
-	serial protocol with checksum
-	
-	Copyright (C) DFRobot - www.dfrobot.com
-*/
+
+  serial protocol with protocol
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
 /**************************************************************************/
 
 #include <Arduino.h>

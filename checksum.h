@@ -3,11 +3,11 @@
   @file     checksum.h
   @author   lisper (lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
-  
-	provide some useful function make it easy to get checksum
-	
-	Copyright (C) DFRobot - www.dfrobot.com
-*/
+
+  provide some useful function make it easy to get checksum
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
 /**************************************************************************/
 uint8_t checksum_add (uint8_t *data, uint8_t leng); 
 

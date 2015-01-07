@@ -12,6 +12,16 @@
 
 #include <Arduino.h>
 
+#define ARGV_SIZE	8
+#define CMD_BUF_SIZE	64
+
+extern uint8_t argc;
+extern char cmdBuf[CMD_BUF_SIZE];
+extern char *argv[ARGV_SIZE];
+
+//
+void serialReadCmd (HardwareSerial);
+
 //split str to cmdstr by space
 int split (char **cmdstr, char *str, int leng); 
 

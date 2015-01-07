@@ -12,35 +12,37 @@
 
 #include <Arduino.h>
 
-//call like : read_serial_with_timeout (Serial1, buffer, 12, 5)
-uint8_t serialRead (HardwareSerial the_serial, 
+//call like : serialRead (Serial1, buffer, 12, 5)
+uint8_t serialRead (HardwareSerial theSerial, 
 		uint8_t *buf, uint8_t leng, uint8_t timeout) {
 	int sub;
-	if (the_serial.available ()) {
+	if (theSerial.available ()) {
 		for (sub=0; sub<leng; sub++) {
 			uint32_t start_time = millis ();
-			while (!the_serial.available ()) {
+			while (!theSerial.available ()) {
 				if (millis () - start_time > timeout)
 					return sub;
 			}
-			buf[sub] = the_serial.read ();
+			buf[sub] = theSerial.read ();
 		}
 		return sub;
 	}
 	return 0;
 }
 
-uint8_t serialReads (HardwareSerial the_serial, 
+uint8_t serialReads (HardwareSerial theSerial, 
 		uint8_t *buf, uint8_t leng, uint8_t timeout) {
 	int sub;
-	if (the_serial.available ()) {
-		for (sub=0; sub<leng; sub++) {
+	if (theSerial.available ()) {
+		for (sub=0; sub<leng-1; sub++) {
 			uint32_t start_time = millis ();
-			while (!the_serial.available ()) {
-				if (millis () - start_time > timeout)
+			while (!theSerial.available ()) {
+				if (millis () - start_time > timeout) {
+					buf[sub] = '\0';
 					return sub;
+				}
 			}
-			buf[sub] = the_serial.read ();
+			buf[sub] = theSerial.read ();
 		}
 		buf[sub] = '\0';
 		return sub;
@@ -50,35 +52,37 @@ uint8_t serialReads (HardwareSerial the_serial,
 
 #if defined(__AVR_ATmega32U4__)
 
-//call like : read_serial_with_timeout (Serial, buffer, 12, 5)
-uint8_t serialRead (Serial_ the_serial, 
+//call like : serialRead (Serial, buffer, 12, 5)
+uint8_t serialRead (Serial_ theSerial, 
 		uint8_t *buf, uint8_t leng, uint8_t timeout) {
 	int sub;
-	if (the_serial.available ()) {
+	if (theSerial.available ()) {
 		for (sub=0; sub<leng; sub++) {
 			uint32_t start_time = millis ();
-			while (!the_serial.available ()) {
+			while (!theSerial.available ()) {
 				if (millis () - start_time > timeout)
 					return sub;
 			}
-			buf[sub] = the_serial.read ();
+			buf[sub] = theSerial.read ();
 		}
 		return sub;
 	}
 	return 0;
 }
 
-uint8_t serialReads (Serial_ the_serial, 
+uint8_t serialReads (Serial_ theSerial, 
 		uint8_t *buf, uint8_t leng, uint8_t timeout) {
 	int sub;
-	if (the_serial.available ()) {
-		for (sub=0; sub<leng; sub++) {
+	if (theSerial.available ()) {
+		for (sub=0; sub<leng-1; sub++) {
 			uint32_t start_time = millis ();
-			while (!the_serial.available ()) {
-				if (millis () - start_time > timeout)
+			while (!theSerial.available ()) {
+				if (millis () - start_time > timeout) {
+					buf[sub] = '\0';
 					return sub;
+				}
 			}
-			buf[sub] = the_serial.read ();
+			buf[sub] = theSerial.read ();
 		}
 		buf[sub] = '\0';
 		return sub;
@@ -142,6 +146,19 @@ void pauseSerial (uint16_t delayTime) {
 	while ((millis () - nowTime < delayTime) && !Serial.available ());
 	Serial.println ("start running...");
 }
+
+//
+void pauseSerial ( HardwareSerial theSerial, uint16_t delayTime) {
+	uint32_t nowTime = millis (); 
+	while ((millis () - nowTime < delayTime) && !theSerial.available ());
+}
+#if defined(__AVR_ATmega32U4__)
+//
+void pauseSerial ( Serial_ theSerial, uint16_t delayTime) {
+	uint32_t nowTime = millis (); 
+	while ((millis () - nowTime < delayTime) && !theSerial.available ());
+}
+#endif
 
 //
 void pauseSerial () {

@@ -1,0 +1,43 @@
+#######################################
+# Syntax Coloring Map For DFRobot_utility
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+DFRobotCar		KEYWORD1
+digitalOut		KEYWORD1
+digitalIn		KEYWORD1
+analogOut		KEYWORD1
+analogIn		KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+changeDir		KEYWORD2
+control			KEYWORD2
+
+serialRead		KEYWORD2
+serialReads		KEYWORD2
+
+split			KEYWORD2
+splitc			KEYWORD2
+
+checksum_add		KEYWORD2
+checksum_nadd		KEYWORD2
+checksum_xor		KEYWORD2
+checksum_add_n		KEYWORD2
+checksum_nadd_n		KEYWORD2
+checksum_xor_n		KEYWORD2
+
+fill_uint16		KEYWORD2
+fill_uint16_bigend	KEYWORD2
+
+#
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+#LITERAL1

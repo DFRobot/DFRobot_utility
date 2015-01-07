@@ -11,7 +11,30 @@
 /**************************************************************************/
 
 #include <Arduino.h>
+#include <DFRobot_utility.h>
+#include "split.h"
 
+//#define ARGV_SIZE	8
+//#define CMD_BUF_SIZE	32
+
+uint8_t argc;
+char cmdBuf[CMD_BUF_SIZE];
+char *argv[ARGV_SIZE];
+
+//
+void serialReadCmd (HardwareSerial theSerial) {
+	int leng = serialReads (theSerial, (uint8_t*)cmdBuf, CMD_BUF_SIZE, 4);
+	if (leng) {
+		Serial.println (cmdBuf);
+		for (int i=0; i<leng; i++) {
+			Serial.print (cmdBuf[i]);
+		}
+		Serial.println ();
+		argc = split (argv, cmdBuf, ARGV_SIZE);
+	} else {
+		argc = 0;
+	}
+}
 
 //split str to cmdstr by space
 int split (char **cmdstr, char *str, int leng) {

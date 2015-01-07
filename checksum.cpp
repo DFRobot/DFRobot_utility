@@ -3,11 +3,11 @@
   @file     checksum.cpp
   @author   lisper (lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
-  
-	provide some useful function make it easy to get checksum
-	
-	Copyright (C) DFRobot - www.dfrobot.com
-*/
+
+  provide some useful function make it easy to get checksum
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
 /**************************************************************************/
 
 #include "Arduino.h"

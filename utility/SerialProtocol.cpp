@@ -3,25 +3,25 @@
   @file     SerialProtocol.cpp
   @author   lisper (lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
-  
-	serial protocol with checksum
-	
-	Copyright (C) DFRobot - www.dfrobot.com
-*/
+
+  serial protocol with protocol 
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
 /**************************************************************************/
 
 #include <DFRobot_utility.h>
 #include <Arduino.h>
 #include "SerialProtocol.h"
 
-#define PRO_MAX 19
+#define PRO_MAX 19	//max data length
 
-//#define _debug
+//#define _debug	//send error message to Serial
 
 //
 uint8_t getChecksum (uint8_t *theData, uint8_t leng) {
 	uint8_t sum = 0;
-	for (uint8_t i=0; i<leng-1; i++) {
+	for (uint8_t i=0; i<leng; i++) {
 		sum += theData[i];
 	}
 	return sum;
@@ -29,7 +29,7 @@ uint8_t getChecksum (uint8_t *theData, uint8_t leng) {
 
 //
 boolean checksum (void *theData, uint8_t leng) {
-	if (getChecksum ((uint8_t*) theData, leng) == ((uint8_t*)theData)[leng-1])
+	if (getChecksum ((uint8_t*) theData, leng-1) == ((uint8_t*)theData)[leng-1])
 		return true;
 	else 
 		return false;
@@ -48,7 +48,7 @@ void sendData (void *theData, uint8_t theLeng) {
 	buffer[0]= 0xff;
 	buffer[1] = theLeng;
 	memcpy ((void*)(buffer+2), theData, theLeng);
-	buffer[pro_size] = getChecksum ((uint8_t*)theData, pro_size);
+	buffer[pro_size-1] = getChecksum ((uint8_t*)theData, pro_size-1);
 #ifdef _debug
 	printHex (buffer, pro_size);
 #endif
@@ -79,7 +79,7 @@ int readData (void *theData, uint8_t theLeng) {
 		Serial.println ("checksum error");
 		printHex (buffer, leng);
 		Serial.print ("checksum is:");
-		Serial.println (getChecksum (buffer, leng), HEX);
+		Serial.println (getChecksum (buffer, leng-1), HEX);
 #endif
 		return -3; 
 	}

@@ -8,6 +8,7 @@
   Copyright (C) DFRobot - www.dfrobot.com
  */
 /**************************************************************************/
+#include "Wire.h"
 #include "DFRobot_utility.h"
 #include "utility/iic.h"
 

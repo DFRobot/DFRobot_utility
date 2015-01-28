@@ -1,7 +1,7 @@
 /**************************************************************************/
 /*! 
   @file     DF_GPS.h
-  @author   lisper (leyapin@gmail.com, lisper.li@gmail.com)
+  @author   lisper (leyapin@gmail.com, lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
 
   parse gps gpgga protocol

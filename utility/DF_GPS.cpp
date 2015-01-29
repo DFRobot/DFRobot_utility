@@ -12,32 +12,10 @@
 
 #include <Arduino.h>
 #include <DF_GPS.h>
+#include <DFCommon.h>
 
 #define _debug
-//
-uint8_t decToInt2 (char *the_buf) {
-	uint8_t value = 0;
-	value += (the_buf[0]-'0') *10;
-	value += (the_buf[1]-'0');
-	return value;
-}
 
-//
-uint8_t hexToInt2 (char *the_buf) {
-	uint8_t value = 0; 
-	if (the_buf[0] >= '0' && the_buf[0] <= '9') {
-		value += (the_buf[0] - '0') * 16;
-	} else {
-		value += (the_buf[0] - 'A' + 10) * 16;
-	}
-
-	if (the_buf[1] >= '0' && the_buf[1] <= '9') {
-		value += (the_buf[1] - '0');
-	} else {
-		value += (the_buf[1] - 'A' + 10);
-	}
-	return value; 
-}
 
 DFGPS::DFGPS (Stream &theSerial) {
 	_mySerial = &theSerial;
@@ -63,47 +41,7 @@ uint8_t DFGPS::gps_read_checksum (char **the_str) {
 	return sum;
 }
 
-
 //
-uint8_t split_by_char (char *the_src, char the_char, char **the_des, uint8_t the_siz) {
-	uint8_t src_len = strlen (the_src);
-	uint8_t di=0;
-	the_des[di++] = the_src;
-	for (uint8_t si=0; si<src_len && di < the_siz; si++) {
-		if (the_src[si] == the_char) {
-			the_des[di++] = the_src+si+1;
-			the_src[si] = '\0';
-		}
-	}
-	return di;
-}
-
-//
-uint8_t split_by_comma (char *the_src, char **the_des, uint8_t the_siz) {
-	return split_by_char (the_src, ',', the_des, the_siz);
-}
-
-/*
-   void DFGPS::gps_print_debug (char **the_strp, uint8_t the_leng) {
-   for (uint8_t i=0; i<the_leng; i++) {
-   printf ("%d:%d = %s\n", i, strlen (the_strp[i]), the_strp[i]);
-   }
-   printf ("----------------------\n");
-   }
- */
-
-
-uint8_t delete_crlf (char *the_buf) {
-	uint8_t leng = strlen (the_buf);
-	for (uint8_t i=0; i<leng-1; i++) {
-		if (the_buf[i] == '\r' && the_buf[i+1] == '\n') {
-			the_buf[i] = '\0';
-			return 1;
-		}
-	}
-	return 0;
-}
-
 void DFGPS::gps_print_gpgga (gpgga_s *my_gpgga) {
 	printf ("now time =	%d:%d:%d\n", my_gpgga->utc.hour, my_gpgga->utc.minute, my_gpgga->utc.second);
 	printf ("%c : %f\n", my_gpgga->ns, my_gpgga->longitude);
@@ -116,8 +54,6 @@ void DFGPS::gps_print_gpgga (gpgga_s *my_gpgga) {
 
 //
 void DFGPS::gpgga (gpgga_s *gpgga_data) {
-	//split_by_comma (gps_buffer, gpsp, sizeof (gpsp)/4);	//!!! bug
-
 	///////////////////////////////////
 	gpgga_data->utc.hour = decToInt2 (gpsp[1]) + 8;
 	gpgga_data->utc.minute = decToInt2 (gpsp[1]+2);
@@ -135,8 +71,6 @@ void DFGPS::gpgga (gpgga_s *gpgga_data) {
 	gpgga_data->a_units = gpsp[10][0];
 	gpgga_data->level = atof (gpsp[11]);
 	gpgga_data->l_units = gpsp[12][0];
-	free (gps_buffer);
-	//gps_print_gpgga (gpgga_data);
 }
 
 int DFGPS::parse () {

@@ -37,28 +37,77 @@ typedef struct {
 	uint8_t diff_id;	//14:差分参考基站标号
 } gpgga_s;
 
+#define GPS_BUF_SIZE 101
+#define GPSP_SIZE 15
+
 //
 uint8_t decToInt2 (char *the_buf); 
 
 //
 uint8_t hexToInt2 (char *the_buf); 
 
-// check sum using xor
-uint8_t gps_checksum (char *array); 
-
-//get gga checksum
-uint8_t gps_read_checksum (char **the_str); 
-
-//
-uint8_t split_by_char (char *the_src, char the_char, char **the_des, uint8_t the_siz); 
-
 //
 uint8_t split_by_comma (char *the_src, char **the_des, uint8_t the_siz); 
 
 //
-//void gps_print_debug (char **the_strp, uint8_t the_leng); 
+uint8_t split_by_char (char *the_src, char the_char, char **the_des, uint8_t the_siz); 
 
-//
-int gps_gpgga_parse (char* gps_string, gpgga_s *gpgga_data); 
+class DFGPS {
+	private:
+		Stream *_mySerial;
+
+		// check sum using xor
+		uint8_t gps_checksum (char *array); 
+
+		//get gga checksum
+		uint8_t gps_read_checksum (char **the_str); 
+		//
+		void gps_print_gpgga (gpgga_s *my_gpgga); 
+		int parse ();
+		uint8_t wordNum;
+
+	public :
+		DFGPS (Stream & mySerial);
+		char gps_buffer[GPS_BUF_SIZE];
+		char *gpsp[GPSP_SIZE];
+		int read ();
+		void printGPGGA ();
+		void gpgga (gpgga_s *gpgga_data); 
+
+		uint8_t getHour (); 
+
+		char *getTime ();
+		uint8_t getMinute (); 
+
+		uint8_t getSecond (); 
+
+		double getLongitude (); 
+		char *getLongitudeStr (); 
+
+		char getNS (); 
+
+		char getEW (); 
+
+		char *getSatellitesStr (); 
+		double getSatellites (); 
+		char fixc ();
+		uint8_t fix ();
+		uint8_t getNum (); 
+		char *getNumStr (); 
+
+		char *getHDOPStr (); 
+		double getHDOP (); 
+		char *getAltidudeStr (); 
+		double getAltidude (); 
+
+		char getAunits (); 
+
+		char *getLevelStr (); 
+		double getLevel (); 
+
+		char getLunits (); 
+
+
+};
 
 #endif

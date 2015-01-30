@@ -1,3 +1,15 @@
+/**************************************************************************/
+/*! 
+  @file     rbgLed.cpp
+  @author   lisper (leyapin@gmail.com)
+  @license  LGPLv3 (see license.txt) 
+
+  rgb led library
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
+/**************************************************************************/
+
 #include <DFRobot_utility.h>
 #include <rgbLed.h>
 
@@ -16,7 +28,7 @@ void rgbLed::setColorRGB (uint8_t rV, uint8_t gV, uint8_t bV) {
 	analogWrite (gPin, gV);
 	analogWrite (bPin, bV);
 }
-  
+
 void rgbLed::setColor (uint16_t color) {
 	float hsb[3] = {(float)color, 1, 1};
 	uint8_t rgb[3];

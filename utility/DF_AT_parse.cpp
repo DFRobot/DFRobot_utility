@@ -1,8 +1,14 @@
-/*	
- *	DF_AT_parse library V0.2
- *	dfrobot AT command parse library
- *	author:	lisper <leyapin@gmail.com> <lisper.li@dfrobot.com>
+/**************************************************************************/
+/*! 
+  @file     DF_AT_parse.cpp
+  @author   lisper (leyapin@gmail.com)
+  @license  LGPLv3 (see license.txt) 
+
+  AT command parse library
+
+  Copyright (C) DFRobot - www.dfrobot.com
  */
+/**************************************************************************/
 
 
 #include <Arduino.h>

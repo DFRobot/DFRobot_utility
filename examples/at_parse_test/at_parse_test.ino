@@ -119,23 +119,23 @@ void setup () {
 void loop () {
 	int leng = serialReads (Serial, (uint8_t*)at_string, BUF_MAX, 5);
 	if (leng) {
-                if (isLogin) {
-                        if (strncmp (at_string, "quit", 4) == 0) {
-                                isLogin = false;
-                                Serial.println ("quit AT mode");
-                        } else {
-                                parse_at_string (at_string, at_tmp);
-                        }
-                } else {
-                        if (strcmp (at_string, "+++") == 0) {
-                                isLogin = true;
-                                Serial.println ("into AT mode");
-                        } else {
-                                Serial.print (strlen (at_string));
-                                Serial.print(":");
-                                Serial.println (at_string);
-                        }
-                }
+		if (isLogin) {
+			if (strncmp (at_string, "quit", 4) == 0) {
+				isLogin = false;
+				Serial.println ("quit AT mode");
+			} else {
+				parse_at_string (at_string, at_tmp);
+			}
+		} else {
+			if (strcmp (at_string, "+++") == 0) {
+				isLogin = true;
+				Serial.println ("into AT mode");
+			} else {
+				Serial.print (strlen (at_string));
+				Serial.print(":");
+				Serial.println (at_string);
+			}
+		}
 	}
 }
 

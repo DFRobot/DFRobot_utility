@@ -4,7 +4,7 @@
   @author   lisper (leyapin@gmail.com, lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
 
-  parse gps gpgga protocol
+  serial GPS library
 
   Copyright (C) DFRobot - www.dfrobot.com
  */

@@ -1,3 +1,15 @@
+/**************************************************************************/
+/*! 
+  @file     DF_AT_parse.h
+  @author   lisper (leyapin@gmail.com)
+  @license  LGPLv3 (see license.txt) 
+
+  AT command parse library
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
+/**************************************************************************/
+
 #ifndef _DF_AT_PARSE
 #define _DF_AT_PARSE
 

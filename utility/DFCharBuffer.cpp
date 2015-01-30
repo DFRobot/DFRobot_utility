@@ -1,3 +1,15 @@
+/**************************************************************************/
+/*! 
+  @file     DFCharBuffer.cpp
+  @author   lisper (leyapin@gmail.com)
+  @license  LGPLv3 (see license.txt) 
+
+  queue, stack, ring buffer for character based on array
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
+/**************************************************************************/
+
 #include <Arduino.h>
 #include <DFCharBuffer.h>
 

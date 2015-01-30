@@ -4,7 +4,7 @@
   @author   lisper (leyapin@gmail.com, lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
 
-  parse gps gpgga protocol
+  serial GPS library
 
   Copyright (C) DFRobot - www.dfrobot.com
  */
@@ -40,17 +40,6 @@ typedef struct {
 #define GPS_BUF_SIZE 101
 #define GPSP_SIZE 15
 
-//
-uint8_t decToInt2 (char *the_buf); 
-
-//
-uint8_t hexToInt2 (char *the_buf); 
-
-//
-uint8_t split_by_comma (char *the_src, char **the_des, uint8_t the_siz); 
-
-//
-uint8_t split_by_char (char *the_src, char the_char, char **the_des, uint8_t the_siz); 
 
 class DFGPS {
 	private:

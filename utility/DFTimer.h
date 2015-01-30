@@ -1,3 +1,18 @@
+/**************************************************************************/
+/*! 
+  @file     DFTimer.h
+  @author   lisper (leyapin@gmail.com)
+  @license  LGPLv3 (see license.txt) 
+
+  timer library use millis ()
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
+/**************************************************************************/
+
+#ifndef _DF_TIMER
+#define _DF_TIMER
+
 #include <Arduino.h>
 
 class DFTimer {
@@ -20,3 +35,4 @@ class DFTimer {
 		void (*timeHandler) (void*);		
 };
 
+#endif

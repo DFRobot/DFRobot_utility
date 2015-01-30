@@ -1,3 +1,15 @@
+/**************************************************************************/
+/*! 
+  @file     DFCommon.cpp
+  @author   lisper (leyapin@gmail.com)
+  @license  LGPLv3 (see license.txt) 
+
+  some usefull function
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
+/**************************************************************************/
+
 #include <Arduino.h>
 
 

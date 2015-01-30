@@ -4,7 +4,7 @@
   @author   lisper (lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
 
-  serial protocol with protocol 
+  serial protocol with checksum
 
   Copyright (C) DFRobot - www.dfrobot.com
  */

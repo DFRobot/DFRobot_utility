@@ -1,3 +1,15 @@
+/**************************************************************************/
+/*! 
+  @file     DFTimer.cpp
+  @author   lisper (leyapin@gmail.com)
+  @license  LGPLv3 (see license.txt) 
+
+  timer library use millis ()
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
+/**************************************************************************/
+
 #include <Arduino.h>
 #include "DFTimer.h"
 

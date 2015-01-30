@@ -1,3 +1,15 @@
+/**************************************************************************/
+/*! 
+  @file     DFCharBuffer.h
+  @author   lisper (leyapin@gmail.com)
+  @license  LGPLv3 (see license.txt) 
+
+  ring, queue, stack buffer for character based on array
+
+  Copyright (C) DFRobot - www.dfrobot.com
+ */
+/**************************************************************************/
+
 #ifndef _DF_CHAR_BUFFER
 #define _DF_CHAR_BUFFER
 

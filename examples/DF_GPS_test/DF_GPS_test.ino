@@ -1,12 +1,10 @@
 /**************************************************************************/
 /*! 
-  @file     DF_GPS_test.ino
-  @author   lisper (leyapin@gmail.com, lisper.li@dfrobot.com)
-  @license  LGPLv3 (see license.txt) 
-
-  test on beetle (leonardo), Serial1 connect GPS
-
-  Copyright (C) DFRobot - www.dfrobot.com
+ @file     DF_GPS_test.ino
+ @author   lisper (leyapin@gmail.com, lisper.li@dfrobot.com)
+ @license  LGPLv3 (see license.txt) 
+ test on uno or leonardo
+ Copyright (C) DFRobot - www.dfrobot.com
  */
 /**************************************************************************/
 #include <DFRobot_utility.h>
@@ -14,49 +12,50 @@
 
 //gpgga_s gpgga_data;
 
-DFGPS gps (Serial1);
+DFGPS gps (Serial);
+//DFGPS gps (Serial1);        if use leonardo and Serial1
 
 void setup () {
-	Serial.begin (9600);
-	Serial1.begin (9600);
-	while (! Serial1);
+        Serial.begin (9600);
+        //Serial1.begin (9600);        if use leonardo and Serial1
+        //while (! Serial1);
 }
 
 //
 void loop () {
-	int res = gps.read ();
-	if (res) {
-		if (gps.fix() == 1) {
-			//gps.gpgga (&gpgga_data);
-			Serial.println ("fixed");
-			print_gps_data ();
-		}
-		gps.printGPGGA ();	//will always print
-	}
+        int res = gps.read ();
+        if (res) {
+                if (gps.fix() == 1) {
+                        //gps.gpgga (&gpgga_data);
+                        Serial.println ("fixed");
+                        print_gps_data ();
+                }
+                gps.printGPGGA ();	//will always print
+        }
 }
 
 //
 void print_gps_data () {
-	Serial.print ("getTime:        ");
-	Serial.println (gps.getTime ());
-	Serial.print ("getLongitude:        ");
-	Serial.println (gps.getLongitudeStr ());
-	Serial.print ("getSatellites:        ");
-	Serial.println (gps.getSatellitesStr ());
-	Serial.print ("fixc:        ");
-	Serial.println (gps.fixc ());
-	Serial.print ("getNum:        ");
-	Serial.println (gps.getNum ());
-	Serial.print ("getHDOP:        ");
-	Serial.println (gps.getHDOP ());
-	Serial.print ("getAltidude:        ");
-	Serial.print (gps.getAltidude ());
-	Serial.println (gps.getAunits ());
+        Serial.print ("getTime:        ");
+        Serial.println (gps.getTime ());
+        Serial.print ("getLongitude:        ");
+        Serial.println (gps.getLongitude (), 6);
+        Serial.print ("getSatellites:        ");
+        Serial.println (gps.getSatellites (), 5);
+        Serial.print ("fixc:        ");
+        Serial.println (gps.fixc ());
+        Serial.print ("getNum:        ");
+        Serial.println (gps.getNum ());
+        Serial.print ("getHDOP:        ");
+        Serial.println (gps.getHDOP ());
+        Serial.print ("getAltidude:        ");
+        Serial.print (gps.getAltidude ());
+        Serial.println (gps.getAunits ());
 
-	Serial.print ("getLevel:        ");
-	Serial.print (gps.getLevelStr ());
-	Serial.println (gps.getLunits ());
-	Serial.println ();
+        Serial.print ("getLevel:        ");
+        Serial.print (gps.getLevelStr ());
+        Serial.println (gps.getLunits ());
+        Serial.println ();
 
 }
 
@@ -81,6 +80,7 @@ void print_gps_data () {
 //	double diff_time;	13
 //	int diff_id;	//14
 //} gpgga_s;
+
 
 
 

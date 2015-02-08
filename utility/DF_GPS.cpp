@@ -4,7 +4,7 @@
   @author   lisper (leyapin@gmail.com, lisper.li@dfrobot.com)
   @license  LGPLv3 (see license.txt) 
 
-  serial GPS library
+  parse gps gpgga protocol
 
   Copyright (C) DFRobot - www.dfrobot.com
  */
@@ -73,6 +73,7 @@ void DFGPS::gpgga (gpgga_s *gpgga_data) {
 	gpgga_data->l_units = gpsp[12][0];
 }
 
+//
 int DFGPS::parse () {
 	delete_crlf (gps_buffer);
 	uint8_t sum = gps_checksum (gps_buffer);
@@ -151,8 +152,10 @@ uint8_t DFGPS::getSecond () {
 
 
 double DFGPS::getLongitude () {
-	return atof (gpsp[2]);
+	double lon = (double)decToInt (gpsp[2], 2);
+	return lon + atof (gpsp[2]+2) / 60.0;
 }
+
 char *DFGPS::getLongitudeStr () {
 	return gpsp[2];
 }
@@ -168,13 +171,16 @@ char DFGPS::getEW () {
 char *DFGPS::getSatellitesStr () {
 	return gpsp[4];
 }
+
 double DFGPS::getSatellites () {
-	return atof (gpsp[4]);
+	double sat = (double)decToInt (gpsp[4], 3);
+	return sat + atof (gpsp[4]+3) / 60.0;
 }
 
 uint8_t DFGPS::getNum () {
 	return atoi (gpsp[7]);
 }
+
 char *DFGPS::getNumStr () {
 	return gpsp[7];
 }
@@ -182,6 +188,7 @@ char *DFGPS::getNumStr () {
 char *DFGPS::getHDOPStr () {
 	return gpsp[8];
 }
+
 double DFGPS::getHDOP () {
 	return atof (gpsp[8]);
 }
@@ -189,6 +196,7 @@ double DFGPS::getHDOP () {
 char *DFGPS::getAltidudeStr () {
 	return gpsp[9];
 }
+
 double DFGPS::getAltidude () {
 	return atof (gpsp[9]);
 }
@@ -196,6 +204,7 @@ double DFGPS::getAltidude () {
 char DFGPS::getAunits () {
 	return gpsp[10][0];
 }
+
 char *DFGPS::getLevelStr () {
 	return gpsp[11];
 }

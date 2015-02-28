@@ -19,6 +19,9 @@
 uint8_t decToInt2 (char *the_buf); 
 
 //
+uint16_t decToInt (char *theBuf, uint8_t theSize); 
+
+//
 uint8_t hexToInt2 (char *the_buf); 
 
 //

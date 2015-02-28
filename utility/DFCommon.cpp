@@ -22,6 +22,16 @@ uint8_t decToInt2 (char *the_buf) {
 }
 
 //
+uint16_t decToInt (char *theBuf, uint8_t theSize) {
+	uint16_t value = 0;
+	for (int i = 0; i<theSize; i++) {
+		value *= 10;
+		value += (theBuf[i]-'0');
+	}
+	return value;
+}
+
+//
 uint8_t hexToInt2 (char *the_buf) {
 	uint8_t value = 0; 
 	if (the_buf[0] >= '0' && the_buf[0] <= '9') {

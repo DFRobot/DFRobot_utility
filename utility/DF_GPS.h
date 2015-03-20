@@ -46,10 +46,10 @@ class DFGPS {
 		Stream *_mySerial;
 
 		// check sum using xor
-		uint8_t gps_checksum (char *array); 
+		uint8_t gpsCalcChecksum (char *array); 
 
 		//get gga checksum
-		uint8_t gps_read_checksum (char **the_str); 
+		uint8_t gpsReadChecksum (char **the_str); 
 		//
 		void gps_print_gpgga (gpgga_s *my_gpgga); 
 		int parse ();
@@ -63,6 +63,8 @@ class DFGPS {
 		void printGPGGA ();
 		void gpgga (gpgga_s *gpgga_data); 
 
+		boolean gpsAvailable (); 
+		boolean timeAvailable ();
 		uint8_t getHour (); 
 
 		char *getTime ();

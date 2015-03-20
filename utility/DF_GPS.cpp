@@ -22,7 +22,7 @@ DFGPS::DFGPS (Stream &theSerial) {
 }
 
 // check sum using xor
-uint8_t DFGPS::gps_checksum (char *array) {
+uint8_t DFGPS::gpsCalcChecksum (char *array) {
 	uint8_t sum = array[1];
 	for (uint8_t i=2; array[i] != '*'; i++) {
 		sum ^= array[i];
@@ -31,10 +31,10 @@ uint8_t DFGPS::gps_checksum (char *array) {
 }
 
 //get gga checksum
-uint8_t DFGPS::gps_read_checksum (char **the_str) {
+uint8_t DFGPS::gpsReadChecksum (char **the_str) {
 	char *temp = the_str[14];
 	if (temp[0] != '*') {
-		printf ("error no *");
+		//printf ("error no *");
 		return 0;
 	}
 	uint8_t sum = hexToInt2 (temp+1);
@@ -55,7 +55,7 @@ void DFGPS::gps_print_gpgga (gpgga_s *my_gpgga) {
 //
 void DFGPS::gpgga (gpgga_s *gpgga_data) {
 	///////////////////////////////////
-	gpgga_data->utc.hour = decToInt2 (gpsp[1]) + 8;
+	gpgga_data->utc.hour = decToInt2 (gpsp[1]);
 	gpgga_data->utc.minute = decToInt2 (gpsp[1]+2);
 	gpgga_data->utc.second = decToInt2 (gpsp[1]+4);
 	///////////////////////////////////
@@ -76,9 +76,9 @@ void DFGPS::gpgga (gpgga_s *gpgga_data) {
 //
 int DFGPS::parse () {
 	delete_crlf (gps_buffer);
-	uint8_t sum = gps_checksum (gps_buffer);
+	uint8_t sum = gpsCalcChecksum (gps_buffer);
 	wordNum = split_by_comma (gps_buffer, gpsp, sizeof (gpsp)/sizeof (char*));
-	uint8_t check_result = gps_read_checksum (gpsp);
+	uint8_t check_result = gpsReadChecksum (gpsp);
 	if (check_result != sum) {
 		return 0;
 	} else
@@ -125,12 +125,27 @@ uint8_t DFGPS::fix () {
 		return 0;
 }
 
+boolean DFGPS::gpsAvailable () {
+	if (fixc () == '1')
+	       return true;
+	else 
+	return false;
+}
+
+boolean DFGPS::timeAvailable () {
+	if (gpsp[1] != '\0')
+		return true;
+	else
+		return false;
+}
+
 uint8_t DFGPS::getHour () {
 	if (gpsp[1][0])
-		return decToInt2 (gpsp[1]) + 8;
+		return decToInt2 (gpsp[1]);
 	else 
 		return 0;
 }
+
 char *DFGPS::getTime () {
 	return gpsp[1];
 }

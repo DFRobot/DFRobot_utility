@@ -22,9 +22,9 @@ typedef struct {
 		uint8_t minute;
 		uint8_t second;
 	}utc;
-	double longitude;	//2:
+	double latitude;	//2:
 	char ns;		//3:
-	double satellites;	//4:
+	double longitude;	//4:
 	char ew;		//5:
 	uint8_t fix;	//6:gps status 0 1 2 3 4 5 6 7 8 9
 	uint8_t num;	//7:
@@ -72,6 +72,8 @@ class DFGPS {
 
 		uint8_t getSecond (); 
 
+		double getLatitude (); 
+		char *getLatitudeStr (); 
 		double getLongitude (); 
 		char *getLongitudeStr (); 
 
@@ -79,8 +81,6 @@ class DFGPS {
 
 		char getEW (); 
 
-		char *getSatellitesStr (); 
-		double getSatellites (); 
 		char fixc ();
 		uint8_t fix ();
 		uint8_t getNum (); 

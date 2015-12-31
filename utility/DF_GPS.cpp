@@ -166,13 +166,22 @@ uint8_t DFGPS::getSecond () {
 }
 
 
+double DFGPS::getLatitude () {
+	double lat = (double)decToInt (gpsp[2], 2);
+	return lat + atof (gpsp[2]+2) / 60.0;
+}
+
+char *DFGPS::getLatitudeStr () {
+	return gpsp[2];
+}
+
 double DFGPS::getLongitude () {
-	double lon = (double)decToInt (gpsp[2], 2);
-	return lon + atof (gpsp[2]+2) / 60.0;
+	double lon = (double)decToInt (gpsp[4], 3);
+	return lon + atof (gpsp[4]+3) / 60.0;
 }
 
 char *DFGPS::getLongitudeStr () {
-	return gpsp[2];
+	return gpsp[4];
 }
 
 char DFGPS::getNS () {
@@ -181,15 +190,6 @@ char DFGPS::getNS () {
 
 char DFGPS::getEW () {
 	return gpsp[5][0];
-}
-
-char *DFGPS::getSatellitesStr () {
-	return gpsp[4];
-}
-
-double DFGPS::getSatellites () {
-	double sat = (double)decToInt (gpsp[4], 3);
-	return sat + atof (gpsp[4]+3) / 60.0;
 }
 
 uint8_t DFGPS::getNum () {

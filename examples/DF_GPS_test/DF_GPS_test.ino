@@ -28,6 +28,12 @@ void loop () {
                 if (gps.fix() == 1) {
                         //gps.gpgga (&gpgga_data);
                         Serial.println ("fixed");
+			Serial.print ("latitude=");
+			Serial.println (gps.getLatitude ());
+			Serial.print ("longitude=");
+			Serial.println (gps.getLongitude());
+			Serial.print ();
+			Serial.print ();
                         print_gps_data ();
                 }
                 gps.printGPGGA ();	//will always print

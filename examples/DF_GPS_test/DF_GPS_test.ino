@@ -39,9 +39,9 @@ void print_gps_data () {
         Serial.print ("getTime:        ");
         Serial.println (gps.getTime ());
         Serial.print ("getLongitude:        ");
-        Serial.println (gps.getLongitude (), 6);
-        Serial.print ("getSatellites:        ");
-        Serial.println (gps.getSatellites (), 5);
+        Serial.println (gps.getLatitude (), 6);
+        Serial.print ("getLongitude:        ");
+        Serial.println (gps.getLongtitude (), 5);
         Serial.print ("fixc:        ");
         Serial.println (gps.fixc ());
         Serial.print ("getNum:        ");
@@ -66,9 +66,9 @@ void print_gps_data () {
 //		int minutes;
 //		int second;
 //	}utc;
-//	double longitude;	//2:
+//	double latitude;	//2:
 //	char ns;		//3:
-//	double satellites;	//4:
+//	double longtitude;	//4:
 //	char ew;		//5:
 //	int fix;	//6:gps status 0 1 2 3 4 5 6 7 8 9
 //	int num;	//7:

@@ -32,8 +32,6 @@ void loop () {
 			Serial.println (gps.getLatitude ());
 			Serial.print ("longitude=");
 			Serial.println (gps.getLongitude());
-			Serial.print ();
-			Serial.print ();
                         print_gps_data ();
                 }
                 gps.printGPGGA ();	//will always print

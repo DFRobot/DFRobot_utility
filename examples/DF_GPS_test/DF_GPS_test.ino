@@ -38,10 +38,10 @@ void loop () {
 void print_gps_data () {
         Serial.print ("getTime:        ");
         Serial.println (gps.getTime ());
-        Serial.print ("getLongitude:        ");
+        Serial.print ("getLatitude:        ");
         Serial.println (gps.getLatitude (), 6);
         Serial.print ("getLongitude:        ");
-        Serial.println (gps.getLongtitude (), 5);
+        Serial.println (gps.getLongitude (), 5);
         Serial.print ("fixc:        ");
         Serial.println (gps.fixc ());
         Serial.print ("getNum:        ");

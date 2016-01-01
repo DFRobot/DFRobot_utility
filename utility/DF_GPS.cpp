@@ -44,8 +44,8 @@ uint8_t DFGPS::gpsReadChecksum (char **the_str) {
 //
 void DFGPS::gps_print_gpgga (gpgga_s *my_gpgga) {
 	printf ("now time =	%d:%d:%d\n", my_gpgga->utc.hour, my_gpgga->utc.minute, my_gpgga->utc.second);
-	printf ("%c : %f\n", my_gpgga->ns, my_gpgga->longitude);
-	printf ("%c : %f\n", my_gpgga->ew, my_gpgga->satellites);
+	printf ("%c : %f\n", my_gpgga->ns, my_gpgga->latitude);
+	printf ("%c : %f\n", my_gpgga->ew, my_gpgga->longitude);
 	printf ("fix =	%d\nnum = %d\n", my_gpgga->fix, my_gpgga->num);
 	printf ("hdop =	%f\n", my_gpgga->hdop);
 	printf ("altitude =	%f %c\n", my_gpgga->altitude, my_gpgga->a_units);
@@ -59,9 +59,9 @@ void DFGPS::gpgga (gpgga_s *gpgga_data) {
 	gpgga_data->utc.minute = decToInt2 (gpsp[1]+2);
 	gpgga_data->utc.second = decToInt2 (gpsp[1]+4);
 	///////////////////////////////////
-	gpgga_data->longitude = atof (gpsp[2]);
+	gpgga_data->latitude= atof (gpsp[2]);
 	gpgga_data->ns = gpsp[3][0];
-	gpgga_data->satellites = atof (gpsp[4]);
+	gpgga_data->longitude= atof (gpsp[4]);
 	gpgga_data->ew = gpsp[5][0];
 	///////////////////////////////////
 	gpgga_data->fix = atoi (gpsp[6]);
